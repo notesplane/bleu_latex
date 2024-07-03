@@ -1,1 +1,59 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\title{BLEU Score Calculation Example}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+The BLEU (Bilingual Evaluation Understudy) score is a popular metric for evaluating the quality of machine-translated text by comparing it to one or more reference translations. It relies on modified n-gram precision to measure how many n-grams in the candidate translation appear in the reference translations.
+
+\section{Modified n-gram Precision}
+The modified n-gram precision is defined as:
+
+\begin{equation}
+p_{n}(\hat{S}; S) = \frac{\sum_{i=1}^{M} \sum_{s \in G_{n}(\hat{y}^{(i)})} \min(C(s, \hat{y}^{(i)}), \max_{y \in S_{i}} C(s, y))}{\sum_{i=1}^{M} \sum_{s \in G_{n}(\hat{y}^{(i)})} C(s, \hat{y}^{(i)})}
+\end{equation}
+
+Where:
+\begin{itemize}
+    \item $\hat{S}$ is the set of candidate sentences.
+    \item $S$ is the set of reference sentences.
+    \item $G_{n}(y)$ is the set of n-grams in sentence $y$.
+    \item $C(s, y)$ is the count of n-gram $s$ in sentence $y$.
+    \item $M$ is the total number of candidate sentences.
+\end{itemize}
+
+\section{Example Calculation}
+Consider a candidate sentence $\hat{y} = \{a, b, a\}$ and a reference sentence $y = \{a, b, a, b, a, b, a\}$ with $n=2$. The set of 2-grams in $\hat{y}$ is $\{ab, ba\}$.
+
+\begin{itemize}
+    \item Count of 2-grams in $\hat{y}$ appearing in $y$: $\sum_{s \in G_{n}(\hat{y})} C(s, y) = 6$.
+    \item Number of times each 2-gram in $\hat{y}$ appears in $y$: $\{ab: 3, ba: 3\}$.
+    \item Therefore, the precision is:
+\end{itemize}
+
+\begin{equation}
+p_{n}(\{\hat{y}\}; \{y\}) = \frac{\sum_{s \in G_{n}(\hat{y})} \min(C(s, \hat{y}), C(s, y))}{\sum_{s \in G_{n}(\hat{y})} C(s, \hat{y})} = \frac{6}{6} = 1.0
+\end{equation}
+
+\section{Conclusion}
+In this document, we have defined the BLEU score and the modified n-gram precision. We also walked through a specific example to illustrate the calculation. This metric is essential for evaluating the quality of machine-translated text against reference translations.
+
+\section{Posting to GitHub}
+To post this example to GitHub, follow these steps:
+\begin{enumerate}
+    \item Create a new repository on GitHub.
+    \item Clone the repository to your local machine.
+    \item Add the LaTeX file to the repository.
+    \item Commit the changes and push to GitHub.
+\end{enumerate}
+
+\end{document}
 
